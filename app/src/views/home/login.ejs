@@ -71,6 +71,21 @@
       text-align: center;
       outline:none;
     }
+    input[type="passwd"]{
+      width:300px;
+      height:45px;
+      border:none;
+      display:inline;
+      outline:none;
+      box-sizing: border-box;
+      background-color: black;
+      color : white;
+      border-radius: 30px;
+      margin:auto;
+      margin-top:3px;
+      text-align: center;
+      outline:none;
+    }
 
     
     input[type=submit]{
@@ -91,6 +106,9 @@
     input[type="text"]::placeholder {
         color: white;
     }
+    input[type="passwd"]::placeholder {
+        color: white;
+    }
 
     input[type=submit]:hover{
       background-color: lightgray;
@@ -100,7 +118,7 @@
         font-family: 'GmarketSansMedium';
         text-align: center;
         color:white;
-        margin-top: 15px;
+        margin-top: 65px;
         font-size: 11px;
     }
 
@@ -112,6 +130,7 @@
             <header id='logo'><a href="#"><img src="https://cdn.discordapp.com/attachments/812210319132065822/830512869073879040/REUN3.png" alt="reun" width="300"></a></header>
                 <div class="in-line">
                         <input id ="id" type="text" name="name" value="" placeholder="사용자명 입력">
+                        <input id ="passwd" type="passwd" name="name" value="" placeholder="비밀번호 입력">
                         <input id ="next" type="submit" name="name" value="다음">
                 </div>
                 <footer id='footer'>&copy;Reun Corp. All rights reserved</footer>
