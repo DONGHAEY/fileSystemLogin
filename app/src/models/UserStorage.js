@@ -16,8 +16,10 @@ class UserStorage {
         return userInfo;
     }
 
-    static getUsers(...fields) { //제귀 호출사용 여부 O//
-        //const users =  this.#users;
+
+    static #getUsers(data, isAll, fields) {
+        const users = JSON.parse(data);
+        if(isAll) return users;
         const newUsers = fields.reduce((newUsers, filed) => {
             if (users.hasOwnProperty(filed)) {
                 newUsers[filed] = users[filed];
@@ -27,19 +29,35 @@ class UserStorage {
         return newUsers;
     }
 
+
+    static getUsers(isAll, ...fields) { //제귀 호출사용 여부 O//
+
+        return fs.readFile("./src/databases/users.json")
+        .then((data) => {
+            return this.#getUsers(data, isAll, fields);
+        })
+        .catch(console.error);
+
+        //const users =  this.#users;
+    }
+
     static getUserInfo(id) {
         return fs.readFile("./src/databases/users.json")
         .then((data) => {
             return this.#getUserInfo(data, id);
         })
-        .catch((err) => console.error);
+        .catch(console.error);
     }
 
-    static save(userInfo) {
-        //const users = this.#users;
+    static async save(userInfo) {
+        const users = await this.getUsers(true);
+        if (users.id.includes(userInfo.id)) {
+            throw "다른 사용자명을 입력해주세요";
+        }
         users.id.push(userInfo.id);
         users.name.push(userInfo.name);
         users.psword.push(userInfo.psword);
+        fs.writeFile("./src/databases/users.json", JSON.stringify(users));
         return { success: true };
     }
 }
