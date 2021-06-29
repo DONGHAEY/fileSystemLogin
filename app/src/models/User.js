@@ -6,11 +6,11 @@ class User {
     constructor(body) {
         this.body = body;
     }
-    login() {
+    async login() {
 
         const cleint = this.body; //코드가 더러워서 바로 body선언으로
         
-        const { id, psword } = UserStorage.getUserInfo(cleint.id);
+        const { id, psword } = (await UserStorage.getUserInfo(cleint.id));
 
        if (id) {
            if(id === cleint.id && psword === cleint.psword) {
